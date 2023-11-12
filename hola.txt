@@ -1,0 +1,49 @@
+<?php
+// Realizar la conexión a la base de datos
+$conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
+
+// Verificar si hay un error en la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener el término de búsqueda ingresado por el usuario
+$searchTerm = $_GET["search"];
+
+// Consulta SQL utilizando un JOIN para combinar la información de las tablas
+$query = "SELECT users.*, orders.order_id, orders.order_date
+          FROM users
+          LEFT JOIN orders ON users.user_id = orders.user_id
+          WHERE users.username LIKE '%$searchTerm%' OR orders.order_id LIKE '%$searchTerm%'";
+
+// Ejecutar la consulta
+$result = $conn->query($query);
+
+// Verificar si se encontraron resultados
+if ($result->num_rows > 0) {
+    // Mostrar los resultados en una tabla
+    echo "<table>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Order ID</th>
+                <th>Order Date</th>
+            </tr>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>".$row["user_id"]."</td>
+                <td>".$row["username"]."</td>
+                <td>".$row["order_id"]."</td>
+                <td>".$row["order_date"]."</td>
+            </tr>";
+    }
+
+    echo "</table>";
+} else {
+    echo "No se encontraron resultados.";
+}
+
+// Cerrar la conexión a la base de datos
+$conn->close();
+?>

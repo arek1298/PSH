@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encuentra un String con Hash</title>
+</head>
+<body>
+  <h1>Encuentra un String con Hash</h1>
+
+  <form id="hashForm">
+    <label for="targetHash">Valor de Hash Deseado:</label>
+    <input type="text" id="targetHash" name="targetHash" required>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div id="result">
+    <!-- Aquí se mostrará el resultado -->
+  </div>
+
+  <script>
+    document.getElementById("hashForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const targetHash = parseInt(document.getElementById("targetHash").value);
+      const result = findStringWithHash(targetHash);
+
+      if (result) {
+        document.getElementById("result").textContent = "El string es: " + result;
+      } else {
+        document.getElementById("result").textContent = "No se encontró el hash";
+      }
+    });
+
+    function findStringWithHash(targetHash) {
+      const diccionario = "abefimoprstuv";
+      const len = diccionario.length;
+
+      for (let i = 0; i < len * len * len; i++) {
+        const char1 = diccionario[Math.floor(i / (len * len)) % len];
+        const char2 = diccionario[Math.floor(i / len) % len];
+        const char3 = diccionario[i % len];
+
+        const candidate = char1 + char2 + char3;
+        const calculatedHash = hash(candidate);
+
+        if (calculatedHash === targetHash) {
+          return candidate;
+        }
+      }
+
+      return null;
+    }
+
+    function hash(x) {
+      let seed = 41;
+      const diccionario = "abefimoprstuv";
+
+      for (let i = 0; i < x.length; i++) {
+        seed = seed * 19 + diccionario.indexOf(x[i]);
+      }
+
+      return seed;
+    }
+  </script>
+</body>
+</html>

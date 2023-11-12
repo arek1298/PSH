@@ -1,0 +1,138 @@
+<?php
+session_start();  // Iniciar sesión (si aún no está iniciada)
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION["usuario"])) {
+    // Si el usuario no ha iniciado sesión, redirigir al formulario de inicio de sesión
+    header("Location: login.php");
+    exit();
+}
+
+// Mostrar información del usuario
+#echo "Bienvenido, " . $_SESSION["usuario"] . "!";  // Puedes personalizar el mensaje según tus necesidades
+
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+  </head>
+<ul>
+
+<!--IMAGEN-->
+<!--img src="logos/issste.png"-->
+<!--empieza el nav-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="primary" href="#"><img style="width: 100px" src="logos/issste.png">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"> <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><?php echo "Bienvenido, " . $_SESSION["usuario"] . "";?> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="destruir.php">Cerrar Sesión</a>
+      </li>
+      
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--TEXTO A LA IZQUIERDA-->
+<H1 align="center"> Departamento de Pensiones,Seguridad e Higiene. </h1>
+ 
+</ul>
+
+
+
+
+
+ 
+  
+<!--CODIGO CSS-->
+
+<BR>
+<BR>
+
+  <body>
+    <!--CONTENEDOR buscar-->
+    <form id="miFormulario" action="buscar.php" method="GET">
+  <center><input type="text" name="RFC" placeholder="Ingresa tu búsqueda">
+  <button type="submit">Buscar</button>
+  <button type="button" onclick="limpiarFormulario()">Limpiar</button></center>
+  <!--SCRIPT PARA LIMPIAR DATOS DE UN BOTÓN-->
+
+  <script>
+function limpiarFormulario() {
+  document.getElementById("miFormulario").reset();
+}
+</script>
+</form>
+
+
+<div class="w3-container" align="center">
+  <h2>INGRESO A SISTEMAS:</h2>
+
+  <div class="w3-card-4 w3-dark-grey" style="width:40%">
+
+    <div class="w3-container w3-center">
+      <h3>Sistema de Correspondencia</h3>
+      
+    
+      <div class="w3-section">
+        <button class="w3-button w3-green">Ingresar</button>
+        <!--button class="w3-button w3-red">Decline</button-->
+      </div>
+    </div>
+ </div>
+<br><br>
+<!--SEGUNDA CARD-->
+<div class="w3-card-4 w3-dark-grey" style="width:40%">
+
+    <div class="w3-container w3-center">
+      <h3>Pago y Presupuesto.</h3>
+      
+    
+      <div class="w3-section">
+        <button class="w3-button w3-green">Ingresar</button>
+        <!--button class="w3-button w3-red">Decline</button-->
+      </div>
+    </div>
+</div>
+<br><br>
+<!--TERCERA CARD-->
+<div class="w3-card-4 w3-dark-grey" style="width:40%">
+
+    <div class="w3-container w3-center">
+      <h3>Archivos Pensionarios.</h3>
+      
+    
+      <div class="w3-section">
+        <button class="w3-button w3-green">Ingresar</button>
+        <!--button class="w3-button w3-red">Decline</button-->
+      </div>
+    </div>
+</div>
+<br>
+<br>
+
+</style>
+  </body>
+  <a href="destruir.php">Salir </A>
+</div>
+
+</html>
